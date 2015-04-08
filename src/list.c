@@ -26,6 +26,7 @@ void list_push(List *self, ListItemType type, void *data)
   else {
     self->head = self->items = list_item;
   }
+  self->count++;
 }
 
 void list_print(List *self)
