@@ -31,10 +31,11 @@ void list_push(List *self, ListItemType type, void *data)
 void list_print(List *self)
 {
   ListItem *item = self->items;
+  printf("[");
   while(item) {
     item->print(item);
     item = item->next;
     if (item) { printf(", "); }
   }
-  printf("\n");
+  printf("]");
 }

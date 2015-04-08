@@ -13,7 +13,9 @@ int main(void)
   nested_list->push(nested_list, INT, (void *)&input);
   list->push(list, LIST, nested_list);
   nested_list->print(nested_list);
+  printf("\n");
   list->print(list);
+  printf("\n");
 
   return 0;
 }
