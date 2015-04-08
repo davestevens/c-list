@@ -4,15 +4,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "list.h"
 
 void list_push(List *, ListItemType, void *);
+void list_shuffle(List *);
 void list_print(List *);
 
 List *list_new(void) {
   List *list = (List *)calloc(1, sizeof(List));
   list->push = list_push;
+  list->shuffle = list_shuffle;
   list->print = list_print;
   return list;
 }
@@ -27,6 +30,49 @@ void list_push(List *self, ListItemType type, void *data)
     self->head = self->items = list_item;
   }
   self->count++;
+}
+
+void list_shuffle(List *self)
+{
+  if (self->count <= 1) {
+    return;
+  }
+
+  // Create an Array of List Item pointers
+  void **nodes = (void *)calloc(self->count, sizeof(void *));
+  {
+    ListItem *item = self->items;
+    while(item) {
+      *(nodes++) = item;
+      item = item->next;
+    }
+  }
+  nodes -= self->count;
+
+  // Shuffle the Array
+  srand((int)time(NULL));
+  {
+    for (uint32_t index = 0; index < self->count; ++index)
+    {
+      uint32_t other = rand() % self->count;
+      void *temp = nodes[other];
+      nodes[other] = nodes[index];
+      nodes[index] = temp;
+    }
+  }
+
+  // Use shuffled array to set the list items next values
+  {
+    ListItem *item;
+    self->items = item = nodes[0];
+    for(uint32_t i = 1; i < self->count; ++i) {
+      item->next = nodes[i];
+      item = item->next;
+      item->next = (void *)0;
+    }
+  }
+
+  free(nodes);
 }
 
 void list_print(List *self)
