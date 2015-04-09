@@ -12,6 +12,7 @@
 #define list_print(list) list->print(list)
 #define list_shuffle(list) list->shuffle(list)
 #define list_flatten(list) list->flatten(list)
+#define list_int_array(list) list->int_array(list)
 
 int main(void)
 {
@@ -40,6 +41,12 @@ int main(void)
   list_flatten(list_1);
   list_print(list_1);
   printf("\n");
+
+  uint32_t *a = list_int_array(list_1);
+
+  for(uint32_t i=0;i<list_1->count;++i) {
+    printf("%d: %d\n", i, a[i]);
+  }
 
   return 0;
 }

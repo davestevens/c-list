@@ -18,6 +18,7 @@ typedef struct list_t
   void (*push)(struct list_t *, ListItemType, void *);
   void (*shuffle)(struct list_t *);
   void (*flatten)(struct list_t *);
+  uint32_t *(*int_array)(struct list_t *);
   void (*print)(struct list_t *);
 } List;
 

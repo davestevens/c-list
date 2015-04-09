@@ -11,6 +11,7 @@
 void list_push(List *, ListItemType, void *);
 void list_shuffle(List *);
 void list_flatten(List *);
+uint32_t *list_int_array(List *);
 void list_print(List *);
 
 List *list_new(void) {
@@ -18,6 +19,7 @@ List *list_new(void) {
   list->push = list_push;
   list->shuffle = list_shuffle;
   list->flatten = list_flatten;
+  list->int_array = list_int_array;
   list->print = list_print;
   return list;
 }
@@ -101,6 +103,20 @@ void list_flatten(List *self)
     }
     item = item->next;
   }
+}
+
+uint32_t *list_int_array(List *self)
+{
+  uint32_t *array;
+  ListItem *item;
+  uint32_t index = 0;
+  array = (uint32_t *)calloc(1, (self->count * sizeof(uint32_t)));
+  item = self->items;
+  while(item) {
+    array[index++] = item->data.integer;
+    item = item->next;
+  }
+  return array;
 }
 
 void list_print(List *self)
