@@ -24,4 +24,16 @@ typedef struct list_t
 
 List *list_new(void);
 
+#define LIST_PUSH(list, type, value) list->push(list, type, (void *)value)
+#define LIST_PUSH_INT(list, value)              \
+  {                                             \
+    uint32_t v = value;                         \
+    LIST_PUSH(list, INT, &v);                   \
+  }
+#define LIST_PUSH_LIST(list, value) LIST_PUSH(list, LIST, value)
+#define LIST_PRINT(list) list->print(list)
+#define LIST_SHUFFLE(list) list->shuffle(list)
+#define LIST_FLATTEN(list) list->flatten(list)
+#define LIST_INT_ARRAY(list) list->int_array(list)
+
 #endif /* _LIST */
