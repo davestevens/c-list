@@ -17,6 +17,7 @@ typedef struct list_t
   uint32_t count;
   void (*push)(struct list_t *, ListItemType, void *);
   void (*shuffle)(struct list_t *);
+  void (*flatten)(struct list_t *);
   void (*print)(struct list_t *);
 } List;
 
