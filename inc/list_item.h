@@ -18,6 +18,7 @@ typedef struct list_item_t
   } data;
   struct list_item_t *next;
   struct list_item_t *previous;
+  void (*free)(struct list_item_t *);
   void (*print)(struct list_item_t *);
 } ListItem;
 

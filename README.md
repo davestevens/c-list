@@ -57,7 +57,7 @@ LIST_FLATTEN(list);
 ```
 
 ## TODO
-- [ ] free
+- [x] free
 - [x] push
 - [x] count
 - [x] shuffle

@@ -19,6 +19,7 @@ typedef struct list_t
   void (*shuffle)(struct list_t *);
   void (*flatten)(struct list_t *);
   uint32_t *(*int_array)(struct list_t *);
+  void (*free)(struct list_t *, uint8_t);
   void (*print)(struct list_t *);
 } List;
 
@@ -31,9 +32,10 @@ List *list_new(void);
     LIST_PUSH(list, INT, &v);                   \
   }
 #define LIST_PUSH_LIST(list, value) LIST_PUSH(list, LIST, value)
-#define LIST_PRINT(list) list->print(list)
 #define LIST_SHUFFLE(list) list->shuffle(list)
 #define LIST_FLATTEN(list) list->flatten(list)
 #define LIST_INT_ARRAY(list) list->int_array(list)
+#define LIST_FREE(list) list->free(list, 1)
+#define LIST_PRINT(list) list->print(list)
 
 #endif /* _LIST */

@@ -38,5 +38,7 @@ int main(void)
 
   free(a);
 
+  LIST_FREE(list_1);
+
   return 0;
 }

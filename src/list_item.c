@@ -7,11 +7,13 @@
 
 #include "list_item.h"
 
+void list_item_free(ListItem *);
 void list_item_print(ListItem *);
 
 ListItem *list_item_new(ListItemType type, void *data)
 {
   ListItem *list_item = (ListItem *)calloc(1, sizeof(ListItem));
+  list_item->free = list_item_free;
   list_item->print = list_item_print;
   list_item->type = type;
 
@@ -25,6 +27,14 @@ ListItem *list_item_new(ListItemType type, void *data)
       break;
   }
   return list_item;
+}
+
+void list_item_free(ListItem *self)
+{
+  if (self->type == LIST) {
+    LIST_FREE(self->data.list);
+  }
+  free(self);
 }
 
 void list_item_print(ListItem *self)

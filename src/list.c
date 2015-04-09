@@ -12,6 +12,7 @@ void list_push(List *, ListItemType, void *);
 void list_shuffle(List *);
 void list_flatten(List *);
 uint32_t *list_int_array(List *);
+void list_free(List *, uint8_t);
 void list_print(List *);
 
 List *list_new(void) {
@@ -20,6 +21,7 @@ List *list_new(void) {
   list->shuffle = list_shuffle;
   list->flatten = list_flatten;
   list->int_array = list_int_array;
+  list->free = list_free;
   list->print = list_print;
   return list;
 }
@@ -99,7 +101,8 @@ void list_flatten(List *self)
       item->next->previous = nested_list->head;
 
       self->count += nested_list->count;
-      list_flatten(nested_list); /* TODO: free nested_list */
+      list_flatten(nested_list);
+      nested_list->free(nested_list, 0);
     }
     item = item->next;
   }
@@ -117,6 +120,18 @@ uint32_t *list_int_array(List *self)
     item = item->next;
   }
   return array;
+}
+
+void list_free(List *self, uint8_t free_items)
+{
+  if (free_items) {
+    ListItem *item = self->items;
+    while(item) {
+      item->free(item);
+      item = item->next;
+    }
+  }
+  free(self);
 }
 
 void list_print(List *self)
