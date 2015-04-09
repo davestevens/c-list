@@ -26,6 +26,7 @@ void list_push(List *self, ListItemType type, void *data)
 {
   ListItem *list_item = list_item_new(type, data);
   if (self->items) {
+    list_item->previous = self->head;
     self->head = self->head->next = list_item;
   }
   else {
@@ -69,6 +70,7 @@ void list_shuffle(List *self)
     self->items = item = nodes[0];
     for(uint32_t i = 1; i < self->count; ++i) {
       item->next = nodes[i];
+      item->next->previous = item;
       self->head = item = item->next;
       item->next = (void *)0;
     }
@@ -80,24 +82,22 @@ void list_shuffle(List *self)
 void list_flatten(List *self)
 {
   ListItem *item = self->items;
-  ListItem *previous = (void *)0;
   while(item) {
     if (item->type == LIST) {
       List *nested_list = item->data.list;
-      if (previous) {
-        previous->next = nested_list->items;
+      if (item->previous) {
+        item->previous->next = nested_list->items;
+        nested_list->items->previous = item->previous;
       }
       else {
         self->items = nested_list->items;
+        nested_list->items->previous = (void *)0;
       }
       nested_list->head->next = item->next;
+      item->next->previous = nested_list->head;
 
-      nested_list->flatten(nested_list);
-      /*
-       * TODO: free the nested list object
-       */
+      list_flatten(nested_list); /* TODO: free nested_list */
     }
-    previous = item;
     item = item->next;
   }
 }
