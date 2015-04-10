@@ -15,9 +15,9 @@ typedef struct list_t
   struct list_item_t *items;
   struct list_item_t *head;
   uint32_t count;
-  void (*push)(struct list_t *, ListItemType, void *);
-  void (*shuffle)(struct list_t *);
-  void (*flatten)(struct list_t *);
+  struct list_t* (*push)(struct list_t *, ListItemType, void *);
+  struct list_t* (*shuffle)(struct list_t *);
+  struct list_t* (*flatten)(struct list_t *);
   uint32_t *(*int_array)(struct list_t *);
   void (*free)(struct list_t *, uint8_t);
   void (*print)(struct list_t *);

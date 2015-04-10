@@ -8,9 +8,9 @@
 
 #include "list.h"
 
-void list_push(List *, ListItemType, void *);
-void list_shuffle(List *);
-void list_flatten(List *);
+List *list_push(List *, ListItemType, void *);
+List *list_shuffle(List *);
+List *list_flatten(List *);
 uint32_t *list_int_array(List *);
 void list_free(List *, uint8_t);
 void list_print(List *);
@@ -26,7 +26,7 @@ List *list_new(void) {
   return list;
 }
 
-void list_push(List *self, ListItemType type, void *data)
+List *list_push(List *self, ListItemType type, void *data)
 {
   ListItem *list_item = list_item_new(type, data);
   if (self->items) {
@@ -37,12 +37,14 @@ void list_push(List *self, ListItemType type, void *data)
     self->head = self->items = list_item;
   }
   self->count++;
+
+  return self;
 }
 
-void list_shuffle(List *self)
+List *list_shuffle(List *self)
 {
   if (self->count <= 1) {
-    return;
+    return self;
   }
 
   /* Create an Array of List Item pointers */
@@ -81,9 +83,10 @@ void list_shuffle(List *self)
   }
 
   free(nodes);
+  return self;
 }
 
-void list_flatten(List *self)
+List *list_flatten(List *self)
 {
   ListItem *item = self->items;
   while(item) {
@@ -108,6 +111,7 @@ void list_flatten(List *self)
     }
     item = item->next;
   }
+  return self;
 }
 
 uint32_t *list_int_array(List *self)
