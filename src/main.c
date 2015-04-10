@@ -19,7 +19,7 @@ int main(void)
   LIST_PUSH_LIST(list_2, list_3);
   LIST_PUSH_LIST(list_1, list_2);
 
-  LIST_PUSH_INT(list_1, 12);
+  /* LIST_PUSH_INT(list_1, 12); */
 
   LIST_SHUFFLE(list_2);
 

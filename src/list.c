@@ -98,7 +98,9 @@ void list_flatten(List *self)
         nested_list->items->previous = (void *)0;
       }
       nested_list->head->next = item->next;
-      item->next->previous = nested_list->head;
+      if (item->next) {
+        item->next->previous = nested_list->head;
+      }
 
       self->count += nested_list->count;
       list_flatten(nested_list);
