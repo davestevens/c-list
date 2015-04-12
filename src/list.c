@@ -109,7 +109,7 @@ List *list_flatten(List *self)
         item->next->previous = nested_list->head;
       }
 
-      self->count += nested_list->count;
+      self->count += (nested_list->count - 1);
       list_flatten(nested_list);
       nested_list->free(nested_list, 0);
     }
