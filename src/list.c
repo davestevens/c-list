@@ -52,12 +52,12 @@ List *list_push(List *self, ListItemType type, void *data)
 ListItem *list_pop(List *self)
 {
   if (!self->head) {
-    return (ListItem *)0;
+    return NULL;
   }
 
   ListItem *item = self->head;
   self->head = item->previous;
-  item->previous = (ListItem *)0;
+  item->previous = NULL;
 
   self->count--;
 
@@ -143,12 +143,12 @@ List *list_flatten(List *self)
 ListItem *list_shift(List *self)
 {
   if (!self->items) {
-    return (ListItem *)0;
+    return NULL;
   }
 
   ListItem *item = self->items;
   self->items = item->next;
-  item->next = (ListItem *)0;
+  item->next = NULL;
 
   self->count--;
 
@@ -158,7 +158,7 @@ ListItem *list_shift(List *self)
 List *list_shift_many(List *self, uint32_t count)
 {
   if (!self->items) {
-    return (List *)0;
+    return NULL;
   }
 
   List *shifted_list = list_new();

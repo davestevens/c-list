@@ -9,7 +9,6 @@
 
 void list_item_free(ListItem *);
 void list_item_print(ListItem *);
-void list_item_print_debug(ListItem *, uint32_t);
 
 ListItem *list_item_new(ListItemType type, void *data)
 {
