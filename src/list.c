@@ -99,12 +99,12 @@ List *list_shuffle(List *self)
   {
     ListItem *item;
     self->items = item = nodes[0];
-    item->previous = (void *)0;
+    item->previous = NULL;
     for(uint32_t i = 1; i < self->count; ++i) {
       item->next = nodes[i];
       item->next->previous = item;
       self->head = item = item->next;
-      item->next = (void *)0;
+      item->next = NULL;
     }
   }
 
@@ -125,7 +125,7 @@ List *list_flatten(List *self)
       }
       else {
         self->items = nested_list->items;
-        nested_list->items->previous = (void *)0;
+        nested_list->items->previous = NULL;
       }
       nested_list->head->next = item->next;
       if (item->next) {
