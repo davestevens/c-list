@@ -4,7 +4,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#ifndef TEST
 #include <time.h>
+#endif /* TEST */
 
 #include "list.h"
 
@@ -59,7 +61,9 @@ List *list_shuffle(List *self)
   nodes -= self->count;
 
   /* Shuffle the Array */
+#ifndef TEST
   srand((int)time(NULL));
+#endif /* TEST */
   {
     for (uint32_t index = 0; index < self->count; ++index)
     {

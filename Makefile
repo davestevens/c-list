@@ -20,6 +20,7 @@ TARGET = LIST
 TEST = LIST_TEST
 ARCHIVE = list.a
 
+test: CFLAGS += -DTEST
 debug:		CFLAGS += -g
 release:	CFLAGS += -O3 -fno-strict-aliasing
 
