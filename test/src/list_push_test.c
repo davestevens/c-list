@@ -6,7 +6,7 @@ TestStatus list_push_test(void)
   List *list = list_new();
   List *nested_list = list_new();
   uint32_t integer = 123;
-  nested_list->push(nested_list, INT, (void *)&integer);
+  LIST_PUSH_INT(nested_list, integer);
   printf("Pushing a List");
 
   list->push(list, LIST, (void *)nested_list);

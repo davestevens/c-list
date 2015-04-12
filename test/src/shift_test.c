@@ -5,8 +5,8 @@ TestStatus shift_test(void)
 {
   List *list = list_new();
   uint32_t integer_1 = 123, integer_2 = 456;
-  list->push(list, INT, (void *)&integer_1);
-  list->push(list, INT, (void *)&integer_2);
+  LIST_PUSH_INT(list, integer_1);
+  LIST_PUSH_INT(list, integer_2);
   printf("Shifting from a List");
 
   {

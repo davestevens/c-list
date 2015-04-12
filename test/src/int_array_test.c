@@ -6,9 +6,9 @@ TestStatus int_array_test(void)
 {
   List *list = list_new();
   uint32_t integer_1 = 123, integer_2 = 456, integer_3 = 789;
-  list->push(list, INT, (void *)&integer_1);
-  list->push(list, INT, (void *)&integer_2);
-  list->push(list, INT, (void *)&integer_3);
+  LIST_PUSH_INT(list, integer_1);
+  LIST_PUSH_INT(list, integer_2);
+  LIST_PUSH_INT(list, integer_3);
   printf("Converting to an Integer array");
 
   uint32_t *array = list->int_array(list);

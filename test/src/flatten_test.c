@@ -7,11 +7,11 @@ TestStatus flatten_test(void)
   List *list = list_new();
   List *nested_list = list_new();
   uint32_t integer_1 = 1, integer_2 = 2, integer_3 = 3, integer_4 = 4;
-  list->push(list, INT, (void *)&integer_1);
-  list->push(list, INT, (void *)&integer_2);
-  list->push(list, LIST, (void *)nested_list);
-  nested_list->push(nested_list, INT, (void *)&integer_3);
-  nested_list->push(nested_list, INT, (void *)&integer_4);
+  LIST_PUSH_INT(list, integer_1);
+  LIST_PUSH_INT(list, integer_2);
+  LIST_PUSH_LIST(list, nested_list);
+  LIST_PUSH_INT(nested_list, integer_3);
+  LIST_PUSH_INT(nested_list, integer_4);
   printf("Flattening a List");
 
   list->flatten(list);
