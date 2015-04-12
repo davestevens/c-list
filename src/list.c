@@ -99,6 +99,7 @@ List *list_shuffle(List *self)
   {
     ListItem *item;
     self->items = item = nodes[0];
+    item->previous = (void *)0;
     for(uint32_t i = 1; i < self->count; ++i) {
       item->next = nodes[i];
       item->next->previous = item;
