@@ -54,6 +54,12 @@ LIST_SHUFFLE(list);
 LIST_FLATTEN(list);
 
 /* `list` now contains: [789, 321, 654, 123, 456] */
+
+/* Shift from a `list` */
+ListItem *item = LIST_SHIFT(list);
+
+/* `list` now contains: [321, 654, 123, 456] */
+/* `item` is a `ListItem` with an integer value of 789 */
 ```
 
 ## TODO
@@ -66,5 +72,5 @@ LIST_FLATTEN(list);
  - [ ] ensure flattened list first?
  - [ ] skip non-int types?
 - [ ] pop
-- [ ] shift
+- [x] shift
 - [ ] unshift
