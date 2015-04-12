@@ -20,6 +20,7 @@ typedef struct list_t
   struct list_t* (*shuffle)(struct list_t *);
   struct list_t* (*flatten)(struct list_t *);
   struct list_item_t* (*shift)(struct list_t *);
+  struct list_t* (*shift_many)(struct list_t *, uint32_t);
   uint32_t *(*int_array)(struct list_t *);
   void (*free)(struct list_t *, uint8_t);
   void (*print)(struct list_t *);
@@ -38,6 +39,7 @@ List *list_new(void);
 #define LIST_SHUFFLE(list) list->shuffle(list)
 #define LIST_FLATTEN(list) list->flatten(list)
 #define LIST_SHIFT(list) list->shift(list)
+#define LIST_SHIFT_MANY(list, count) list->shift_many(list, count)
 #define LIST_INT_ARRAY(list) list->int_array(list)
 #define LIST_FREE(list) list->free(list, 1)
 #define LIST_PRINT(list) list->print(list)

@@ -15,6 +15,7 @@ ListItem *list_pop(List *);
 List *list_shuffle(List *);
 List *list_flatten(List *);
 ListItem *list_shift(List *);
+List *list_shift_many(List *, uint32_t);
 uint32_t *list_int_array(List *);
 void list_free(List *, uint8_t);
 void list_print(List *);
@@ -26,6 +27,7 @@ List *list_new(void) {
   list->shuffle = list_shuffle;
   list->flatten = list_flatten;
   list->shift = list_shift;
+  list->shift_many = list_shift_many;
   list->int_array = list_int_array;
   list->free = list_free;
   list->print = list_print;
@@ -150,6 +152,24 @@ ListItem *list_shift(List *self)
   self->count--;
 
   return item;
+}
+
+List *list_shift_many(List *self, uint32_t count)
+{
+  if (!self->items) {
+    return (List *)0;
+  }
+
+  List *shifted_list = list_new();
+  uint32_t index = 0;
+  while(index < count) {
+    ListItem *item = self->shift(self);
+    shifted_list->push(shifted_list, item->type, (void *)&item->data);
+    item->free(item);
+    ++index;
+  }
+
+  return shifted_list;
 }
 
 uint32_t *list_int_array(List *self)

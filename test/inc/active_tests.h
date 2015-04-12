@@ -6,7 +6,7 @@ TestStatus int_array_test(void);
 TestStatus shift_test(void);
 TestStatus pop_test(void);
 TestStatus unshift_test(void);
-TestStatus shift_multiple_test(void);
+TestStatus shift_many_test(void);
 
 test_function_t test_function_array[] = {
   &integer_push_test,
@@ -17,5 +17,5 @@ test_function_t test_function_array[] = {
   &shift_test,
   &pop_test,
   &unshift_test,
-  &shift_multiple_test,
+  &shift_many_test,
 };

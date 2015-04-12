@@ -61,10 +61,16 @@ ListItem *item = LIST_SHIFT(list);
 /* `list` now contains: [321, 654, 123, 456] */
 /* `item` is a `ListItem` with an integer value of 789 */
 
+/* Shift many from `list` */
+List *shifted_list = LIST_SHIFT_MANY(list, 2);
+
+/* `list` now contains: [123, 456] */
+/* `shifted_list` is a `List` containin: [321, 654] */
+
 /* Pop from `list` */
 ListItem *item = LIST_POP(list);
 
-/* `list` now contains: [321, 654, 123] */
+/* `list` now contains: [123] */
 /* `item` is ` ListItem` with an integer value of 456 */
 ```
 
