@@ -117,6 +117,7 @@ List *list_flatten(List *self)
   while(item) {
     if (item->type == LIST) {
       List *nested_list = item->data.list;
+      list_flatten(nested_list);
       if (item->previous) {
         item->previous->next = nested_list->items;
         nested_list->items->previous = item->previous;
@@ -131,7 +132,6 @@ List *list_flatten(List *self)
       }
 
       self->count += (nested_list->count - 1);
-      list_flatten(nested_list);
       nested_list->free(nested_list, 0);
     }
     item = item->next;
