@@ -55,11 +55,24 @@ LIST_FLATTEN(list);
 
 /* `list` now contains: [789, 321, 654, 123, 456] */
 
-/* Shift from a `list` */
+/* Shift from `list` */
 ListItem *item = LIST_SHIFT(list);
 
 /* `list` now contains: [321, 654, 123, 456] */
 /* `item` is a `ListItem` with an integer value of 789 */
+
+/* Pop from `list` */
+ListItem *item = LIST_POP(list);
+
+/* `list` now contains: [321, 654, 123] */
+/* `item` is ` ListItem` with an integer value of 456 */
+```
+
+## Tests
+```
+make clean
+make test
+./LIST_TEST
 ```
 
 ## TODO
@@ -71,6 +84,6 @@ ListItem *item = LIST_SHIFT(list);
 - [x] int_array
  - [ ] ensure flattened list first?
  - [ ] skip non-int types?
-- [ ] pop
+- [x] pop
 - [x] shift
 - [ ] unshift

@@ -16,6 +16,7 @@ typedef struct list_t
   struct list_item_t *head;
   uint32_t count;
   struct list_t* (*push)(struct list_t *, ListItemType, void *);
+  struct list_item_t* (*pop)(struct list_t *);
   struct list_t* (*shuffle)(struct list_t *);
   struct list_t* (*flatten)(struct list_t *);
   struct list_item_t* (*shift)(struct list_t *);
@@ -33,6 +34,7 @@ List *list_new(void);
     LIST_PUSH(list, INT, &v);                   \
   }
 #define LIST_PUSH_LIST(list, value) LIST_PUSH(list, LIST, value)
+#define LIST_POP(list) list->pop(list)
 #define LIST_SHUFFLE(list) list->shuffle(list)
 #define LIST_FLATTEN(list) list->flatten(list)
 #define LIST_SHIFT(list) list->shift(list)

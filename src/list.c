@@ -11,6 +11,7 @@
 #include "list.h"
 
 List *list_push(List *, ListItemType, void *);
+ListItem *list_pop(List *);
 List *list_shuffle(List *);
 List *list_flatten(List *);
 ListItem *list_shift(List *);
@@ -21,6 +22,7 @@ void list_print(List *);
 List *list_new(void) {
   List *list = (List *)calloc(1, sizeof(List));
   list->push = list_push;
+  list->pop = list_pop;
   list->shuffle = list_shuffle;
   list->flatten = list_flatten;
   list->shift = list_shift;
@@ -43,6 +45,21 @@ List *list_push(List *self, ListItemType type, void *data)
   self->count++;
 
   return self;
+}
+
+ListItem *list_pop(List *self)
+{
+  if (!self->head) {
+    return (ListItem *)0;
+  }
+
+  ListItem *item = self->head;
+  self->head = item->previous;
+  item->previous = (ListItem *)0;
+
+  self->count--;
+
+  return item;
 }
 
 List *list_shuffle(List *self)
